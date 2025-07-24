@@ -15,20 +15,14 @@ const PORT = process.env.PORT || 5000;
 // trust proxy 설정 추가
 app.set("trust proxy", 1);
 
-// CORS 설정
 const corsOptions = {
 	origin: [
 		"https://bootcampchat-fe.run.goorm.site",
 		"https://bootcampchat-hgxbv.dev-k8s.arkain.io",
 		"http://localhost:3000",
-		"http://localhost:3001",
-		"http://localhost:3002",
 		"https://localhost:3000",
-		"https://localhost:3001",
-		"https://localhost:3002",
-		"http://0.0.0.0:3000",
-		"https://0.0.0.0:3000",
 		"https://chat.goorm-ktb-010.goorm.team",
+		"https://goorm-ktb-010.goorm.team", //  여기가 추가된 부분
 	],
 	credentials: true,
 	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -42,6 +36,7 @@ const corsOptions = {
 	],
 	exposedHeaders: ["x-auth-token", "x-session-id"],
 };
+
 
 // 기본 미들웨어
 app.use(cors(corsOptions));
