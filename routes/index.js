@@ -27,7 +27,8 @@ router.get('/', (req, res) => {
       users: '/users',
       rooms: '/rooms',
       files: '/files',
-      ai: '/ai'
+      ai: '/ai',
+      envCheck: '/env-check'
     }
   });
 });
@@ -35,7 +36,19 @@ router.get('/', (req, res) => {
 // Mount routes
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
-router.use('/rooms', roomsRouter);  // roomsRouter로 변경
+router.use('/rooms', roomsRouter);
 router.use('/files', fileRoutes);
+
+// ✅ Environment Variable Check Route
+router.get('/env-check', (req, res) => {
+  res.json({
+    REDIS_HOST: process.env.REDIS_HOST,
+    REDIS_PORT: process.env.REDIS_PORT,
+    MONGO_URI: process.env.MONGO_URI,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NODE_ENV: process.env.NODE_ENV,
+    // 필요하다면 추가 변수도 여기에
+  });
+});
 
 module.exports = router;
